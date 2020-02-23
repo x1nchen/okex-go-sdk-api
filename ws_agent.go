@@ -10,9 +10,7 @@ package okex
 import (
 	"bytes"
 	"compress/flate"
-	"github.com/gorilla/websocket"
 	"io/ioutil"
-
 	"log"
 	"os"
 	"os/signal"
@@ -20,6 +18,8 @@ import (
 	"sync"
 	"syscall"
 	"time"
+
+	"github.com/gorilla/websocket"
 )
 
 type OKWSAgent struct {
@@ -50,7 +50,7 @@ func (a *OKWSAgent) Start(config *Config) error {
 		log.Fatalf("dial:%+v", err)
 		return err
 	} else {
-		if a.config.IsPrint {
+		if config.IsPrint {
 			log.Printf("Connected to %s", a.baseUrl)
 		}
 		a.conn = c
@@ -261,7 +261,6 @@ func (a *OKWSAgent) work() {
 			break
 		case <-a.stopCh:
 			return
-
 		}
 	}
 }
