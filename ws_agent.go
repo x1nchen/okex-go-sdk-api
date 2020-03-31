@@ -42,7 +42,8 @@ type OKWSAgent struct {
 }
 
 func (a *OKWSAgent) Start(config *Config) error {
-	a.baseUrl = config.WSEndpoint + "ws/v3?compress=true"
+	// a.baseUrl = config.WSEndpoint + "ws/v3?compress=true"
+	a.baseUrl = config.WSEndpoint
 	log.Printf("Connecting to %s", a.baseUrl)
 	c, _, err := websocket.DefaultDialer.Dial(a.baseUrl, nil)
 
